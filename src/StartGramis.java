@@ -334,6 +334,9 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
                                 terminal.resetLine();
                                 int numEtudiant = textIO.newIntInputReader().read("Tapez votre choix: ");
                                 String valeurCode = textIO.newStringInputReader().read("Code: ");
+                                terminal.println("Vous avez choisi le N° "
+                                                         + numEtudiant + " avec le code "
+                                                         + lettreCode + valeurCode);
                                 // mettre à jour le code de la Session2
                                 moyenneEcStringUpdateBuilder.where()
                                         .eq(MoyenneEc.MATRICULE_FIELD_NAME,
