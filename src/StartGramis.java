@@ -351,6 +351,14 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
                                                       " | Continuer ? [Taper 'quit' pour quitter]");
 
                             }
+                            quitGramis = textIO.newStringInputReader()
+                                    .withDefaultValue("Non").read("Continuer Gramis? [Taper 'quit' pour quitter]");
+                            if (quitGramis.equals("quit")) {
+                                textIO.dispose();
+                            } else {
+                                terminal.moveToLineStart();
+                            }
+
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
@@ -384,6 +392,13 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
 
                             exitCode = textIO.newStringInputReader()
                                     .withDefaultValue("Non").read("Continuer ? [Taper 'quit' pour quitter]");
+                        }
+                        quitGramis = textIO.newStringInputReader()
+                                .withDefaultValue("Non").read("Continuer Gramis? [Taper 'quit' pour quitter]");
+                        if (quitGramis.equals("quit")) {
+                            textIO.dispose();
+                        } else {
+                            terminal.moveToLineStart();
                         }
                     }
                 }
