@@ -343,9 +343,13 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
                                 moyenneEcStringUpdateBuilder
                                         .updateColumnValue(MoyenneEc.SESSION2_FIELD_NAME, lettreCode + valeurCode);
                                 moyenneEcStringUpdateBuilder.update();
-
+                                //terminal.resetLine();
                                 exitCode = textIO.newStringInputReader()
-                                        .withDefaultValue("Non").read("Continuer ? [Taper 'quit' pour quitter]");
+                                        .withDefaultValue("Non")
+                                        .read("Entrée precedente : Etudiant N° " + numEtudiant +
+                                                      " | Code: " + lettreCode + valeurCode +
+                                                      " | Continuer ? [Taper 'quit' pour quitter]");
+
                             }
                         } catch (SQLException e) {
                             e.printStackTrace();
