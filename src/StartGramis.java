@@ -351,17 +351,16 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
                                                       " | Continuer ? [Taper 'quit' pour quitter]");
 
                             }
-                            quitGramis = textIO.newStringInputReader()
-                                    .withDefaultValue("Non").read("Continuer Gramis? [Taper 'quit' pour quitter]");
-                            if (quitGramis.equals("quit")) {
-                                textIO.dispose();
-                            } else {
-                                terminal.moveToLineStart();
-                            }
-
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
+//                        quitGramis = textIO.newStringInputReader()
+//                                .withDefaultValue("Non").read("Continuer Saisie? [Taper 'quit' pour quitter]");
+//                            /*if (quitGramis.equals("quit")) {
+//                                textIO.dispose();
+//                            } else {
+//                                terminal.moveToLineStart();
+//                            }*/
                     }
 
                     // if NOTE
@@ -391,16 +390,27 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
                             }
 
                             exitCode = textIO.newStringInputReader()
-                                    .withDefaultValue("Non").read("Continuer ? [Taper 'quit' pour quitter]");
-                        }
-                        quitGramis = textIO.newStringInputReader()
-                                .withDefaultValue("Non").read("Continuer Gramis? [Taper 'quit' pour quitter]");
-                        if (quitGramis.equals("quit")) {
-                            textIO.dispose();
-                        } else {
-                            terminal.moveToLineStart();
+                                    .withDefaultValue("OUI").read("Continuer ? [Taper 'quit' pour quitter]");
                         }
                     }
+                    quitGramis = textIO.newStringInputReader()
+                            .withDefaultValue("OUI").read("Continuer Saisie? [Taper 'quit' pour quitter]");
+                    /*if (quitGramis.equals("quit")) {
+                        textIO.dispose();
+                    } else {
+                        terminal.moveToLineStart();
+                    }*/
+                }
+                // Reset the quitGramis variable
+                quitGramis = "Non";
+                // Quit the gramis App
+                String quit_app = textIO.newStringInputReader()
+                        .withDefaultValue("Non").read("Continuer Gramis? [Taper 'quit' pour quitter]");
+                if (quit_app.equals("quit")) {
+                    quitApp = false;
+                    textIO.dispose();
+                } else {
+                    terminal.moveToLineStart();
                 }
                 //</editor-fold>
             } else if (choixMenu == 6) {

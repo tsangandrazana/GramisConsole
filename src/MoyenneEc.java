@@ -102,7 +102,8 @@ public class MoyenneEc {
             List<MoyenneEc> moyEcForLoop = null;
             moyenneEcStringQueryBuilder.where()
                     .eq(EC_FIELD_NAME, ec_id).and().eq(SEMESTRE_FIELD_NAME, semestre)
-                    .and().eq("refaire", "OUI");
+                    .and().eq("refaire", "OUI")
+                    .and().ne(MoyenneEc.SESSION2_FIELD_NAME, "NULL");
             moyenneEcStringQueryBuilder.orderBy(MoyenneEc.SESSION2_FIELD_NAME, true);
             moyEcForLoop = moyenneEcStringQueryBuilder.query();
             for (MoyenneEc moyEc : moyEcForLoop) {
