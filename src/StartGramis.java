@@ -414,7 +414,12 @@ public class StartGramis implements BiConsumer<TextIO, RunnerData> {
                 }
                 //</editor-fold>
             } else if (choixMenu == 6) {
+                String niveau = textIO.newStringInputReader()
+                        .read("Niveau: ");
+                Double deliberation = textIO.newDoubleInputReader()
+                        .read("Deliberation: ");
                 // Calcul admission Session 2
+                AdmissionSession2.calculerAdmissionSession2(niveau, deliberation);
             } else if (choixMenu == 7) {
                 terminal.dispose();
                 quitApp = false;

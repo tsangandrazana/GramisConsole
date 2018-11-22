@@ -7,6 +7,7 @@ import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @DatabaseTable(tableName = "admission_session1")
@@ -175,6 +176,28 @@ public class AdmissionSession1 {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<Etudiant> getEtudiantNonAdmisParNiveau(String niveau) {
+        List<Etudiant> etudiantNonAdmis = new ArrayList<>();
+        try {
+            admissionSession1Dao = DaoManager.createDao(Main.connectionSource, AdmissionSession1.class);
+            QueryBuilder<AdmissionSession1, String> admissionSession1StringQueryBuilder =
+                    admissionSession1Dao.queryBuilder();
+            List<AdmissionSession1> etudiantNonAdmisSession1 = admissionSession1StringQueryBuilder.where()
+                    .eq(NIVEAU_FIELD_NAME, niveau)
+                    .and()
+                    .eq(ADMISSION_FIELD_NAME, "NON")
+                    .query();
+            for (AdmissionSession1 etdNonAdmis : etudiantNonAdmisSession1) {
+                Etudiant etd = Etudiant.getEtudiantByMatricule(etdNonAdmis.matricule_id.getMatricule_id());
+                etudiantNonAdmis.add(etd);
+            }
+            return etudiantNonAdmis;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return etudiantNonAdmis;
     }
 
     public static List<AdmissionSession1> getAdmissionParNiveau(String niveau) {
